@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
-import { NamedCursor, BF } from "./Build";
+import { BF } from "./Build";
 import { DEPTS } from "../data";
 
 function rng(seed: number) {
@@ -60,31 +60,18 @@ const EVENTS = [
 ];
 
 const STEPS = ["Seller leads answered", "Rent reminders sent", "Books reconciled", "Drafting investor update…"];
-const CREW = [
-  { n: "Leak", c: "#2557E8" },
-  { n: "Desk", c: "#0B7D57" },
-  { n: "Ledger", c: "#B45309" },
-  { n: "LP", c: "#C2336A" },
-];
 
 export function Hero() {
   const city = useCity();
   const [pct, setPct] = useState(68);
   const [ev, setEv] = useState(0);
-  const [pos, setPos] = useState(CREW.map((_, i) => ({ x: 120 + i * 220, y: 120 + (i % 2) * 120 })));
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) return;
     const a = window.setInterval(() => setPct((p) => (p >= 100 ? 12 : p + 2)), 900);
     const b = window.setInterval(() => setEv((e) => (e + 1) % EVENTS.length), 2600);
-    const c = window.setInterval(() => {
-      const w = Math.min(window.innerWidth - 48, 1200);
-      setPos(CREW.map(() => ({ x: 40 + Math.random() * (w - 160), y: 40 + Math.random() * 300 })));
-    }, 2400);
-    return () => { clearInterval(a); clearInterval(b); clearInterval(c); };
+    return () => { clearInterval(a); clearInterval(b); };
   }, []);
 
   const doneSteps = Math.min(3, Math.floor(pct / 26));
@@ -116,7 +103,7 @@ export function Hero() {
             Watch the agents work
           </button>
         </div>
-        <div className="mono hero-hint">Scroll to build · Move your mouse and the crew follows · Esc skips</div>
+        <div className="mono hero-hint">Scroll to build · Stop and the crew comes to your cursor · Esc skips</div>
 
         <BF size="Portfolio · 1200 × 560" className="stage-bf">
           <div className="stage">
@@ -149,10 +136,6 @@ export function Hero() {
               <i style={{ width: 8, height: 8, borderRadius: 4, background: e2.c, display: "inline-block" }} />
               <b>{e2.a}</b> {e2.t} · {e2.s}
             </div>
-
-            {mounted && CREW.map((c, i) => (
-              <NamedCursor key={c.n} name={c.n} color={c.c} style={{ left: 0, top: 0, transform: `translate(${pos[i].x}px, ${pos[i].y}px)` }} />
-            ))}
 
             <div className="status">
               <div className="row">

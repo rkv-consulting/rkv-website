@@ -1,4 +1,5 @@
-import { BF, BuildController, NamedCursor } from "./components/Build";
+import { BF, NamedCursor } from "./components/Build";
+import { BuildEngine } from "./components/BuildEngine";
 import { Hero } from "./components/Hero";
 import { Workspace } from "./components/Workspace";
 import { Nav, Stats, Crew, DrawBars, SmsThread } from "./components/Interactive";
@@ -323,7 +324,7 @@ export default function Page() {
         <Ship />
       </main>
       <Footer />
-      <BuildController />
+      <BuildEngine />
     </>
   );
 }
