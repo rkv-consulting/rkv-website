@@ -65,7 +65,7 @@ export function Stats() {
     { to: 21, s: "", l: "agents across your portfolio" },
     { to: 6, s: "", l: "departments, from leads to lenders" },
     { to: 24, s: "/7", l: "resident desk, nights and weekends" },
-    { to: 47, s: "s", l: "target first reply to a seller lead" },
+    { to: 1, s: "", l: "brief a week from The Brain, on Monday" },
   ];
   return (
     <div className="stats">
@@ -103,6 +103,18 @@ export function Crew() {
         ))}
       </div>
       <div className="grid3" key={dept}>
+        {(() => {
+          const d = DEPTS.find((x) => x.id === dept);
+          const span = d && d.agents.length === 3 ? "1 / -1" : undefined;
+          return (
+            <article className="card dept-card" style={{ gridColumn: span, ["--dc" as string]: d ? d.color : "#0B1215" }}>
+              <span className="mono">{d ? `${d.agents.length} agents` : "21 agents · 6 departments"}</span>
+              <h3>{d ? d.name : "The whole crew"}</h3>
+              <p>{d ? d.blurb : "Every agent shares one picture of your portfolio, and The Brain reads them all."}</p>
+              <a className="link-arrow" href="#contact">Start with {d ? d.name.toLowerCase() : "one department"} <span>→</span></a>
+            </article>
+          );
+        })()}
         {list.map((a, i) => (
           <article className="card agent-card" key={a.code} style={{ animationDelay: `${Math.min(i, 8) * 0.04}s` }}>
             <div className="who">
@@ -113,16 +125,16 @@ export function Crew() {
             <h3>{a.name}</h3>
             <p>{a.job}</p>
             <div className="foot">
-              <span className="mono">target</span>
-              <span className="met"><Spark color={a.color} />{a.metric} {a.unit}</span>
+              <span className="mono">works in</span>
+              <span className="met"><Spark color={a.color} />{a.metric}</span>
             </div>
           </article>
         ))}
         <BF className="card brain-card" size="The Brain · 1200 × auto">
           <div>
             <div className="brain-who"><CursorIcon color="#14A385" size={16} /><span>Brain</span><span className="mono">1 agent over all 20</span></div>
-            <h3 style={{ fontSize: 28 }}>The Brain</h3>
-            <p>{brain.agents[0].job} It reads every department, so you read one page instead of twenty inboxes.</p>
+            <h3>The Brain</h3>
+            <p>{brain.agents[0].job} It reads every department and puts what needs you on one page.</p>
           </div>
           <BrainBrief />
         </BF>
@@ -133,9 +145,9 @@ export function Crew() {
 
 function BrainBrief() {
   const items = [
-    { k: "Capital", c: "#E0457B", t: "Fund II loan matures in 14 months. Refi packet is ready for your review." },
-    { k: "Ops", c: "#0E9F6E", t: "Unit 4B is 9 days late with a promise to pay Friday. Approve the payment plan?" },
-    { k: "Acq", c: "#2F6BFF", t: "Two seller leads want a call this week. Calls are pencilled in for Tue and Thu." },
+    { k: "Capital", c: "#C2336A", t: "Fund II loan matures in 14 months. Refi packet is ready for your review." },
+    { k: "Ops", c: "#0B7D57", t: "Unit 4B is 9 days late with a promise to pay Friday. Approve the payment plan?" },
+    { k: "Acq", c: "#2557E8", t: "Two seller leads want a call this week. Calls are pencilled in for Tue and Thu." },
   ];
   const [n, setN] = useState(1);
   useEffect(() => {
@@ -158,10 +170,10 @@ function BrainBrief() {
 
 export function DrawBars() {
   const rows = [
-    { l: "Demo", v: 100, c: "#0E9F6E" },
-    { l: "Framing", v: 82, c: "#0891B2" },
-    { l: "Electrical", v: 46, c: "#2F6BFF" },
-    { l: "Finishes", v: 12, c: "#D97706" },
+    { l: "Demo", v: 100, c: "#0B7D57" },
+    { l: "Framing", v: 82, c: "#0E7490" },
+    { l: "Electrical", v: 46, c: "#2557E8" },
+    { l: "Finishes", v: 12, c: "#B45309" },
   ];
   const ref = useRef<HTMLDivElement>(null);
   const [on, setOn] = useState(false);

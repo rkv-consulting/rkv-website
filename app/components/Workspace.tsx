@@ -87,7 +87,7 @@ export function Workspace() {
             </aside>
             <div className="ws-main">
               <div className="panel">
-                <h4>Live activity</h4>
+                <h3>Live activity</h3>
                 <p className="mono" style={{ margin: "0 0 14px" }}>{d.name.toLowerCase()} · today</p>
                 <ul className="feed" aria-live="off">
                   {feed.map((f) => (
@@ -99,7 +99,7 @@ export function Workspace() {
                 </ul>
               </div>
               <div className="panel">
-                <h4>{d.name}</h4>
+                <h3>{d.name}</h3>
                 <p className="mono" style={{ margin: "0 0 14px" }}>{d.agents.length} agents online</p>
                 <div className="ws-agents">
                   {d.agents.map((a) => (

@@ -50,21 +50,21 @@ function useCity() {
 }
 
 const EVENTS = [
-  { a: "Leak", c: "#2F6BFF", t: "Seller lead booked", s: "12 Oak St" },
-  { a: "Rent", c: "#0E9F6E", t: "Promise to pay logged", s: "Unit 4B" },
-  { a: "Ledger", c: "#D97706", t: "37 bills coded", s: "Maple Court" },
-  { a: "Desk", c: "#0E9F6E", t: "Resident answered", s: "2:14 am" },
-  { a: "LP", c: "#E0457B", t: "Q3 update drafted", s: "Fund II" },
-  { a: "Draw", c: "#0891B2", t: "Draw #3 checked", s: "Elm rehab" },
-  { a: "Tax", c: "#0E9F6E", t: "Appeal packet ready", s: "+$18k value gap" },
+  { a: "Leak", c: "#2557E8", t: "Seller lead booked", s: "Oak St" },
+  { a: "Rent", c: "#0B7D57", t: "Promise to pay logged", s: "Unit 4B" },
+  { a: "Ledger", c: "#B45309", t: "37 bills coded", s: "Maple Court" },
+  { a: "Desk", c: "#0B7D57", t: "Resident answered", s: "2:14 am" },
+  { a: "LP", c: "#C2336A", t: "Q3 update drafted", s: "Fund II" },
+  { a: "Draw", c: "#0E7490", t: "Draw #3 checked", s: "Elm rehab" },
+  { a: "Tax", c: "#0B7D57", t: "Appeal packet ready", s: "+$18k value gap" },
 ];
 
 const STEPS = ["Seller leads answered", "Rent reminders sent", "Books reconciled", "Drafting investor update…"];
 const CREW = [
-  { n: "Leak", c: "#2F6BFF" },
-  { n: "Desk", c: "#0E9F6E" },
-  { n: "Ledger", c: "#D97706" },
-  { n: "LP", c: "#E0457B" },
+  { n: "Leak", c: "#2557E8" },
+  { n: "Desk", c: "#0B7D57" },
+  { n: "Ledger", c: "#B45309" },
+  { n: "LP", c: "#C2336A" },
 ];
 
 export function Hero() {
@@ -95,9 +95,9 @@ export function Hero() {
       <div className="wrap" data-enter>
         <div className="mono hero-label">/hero · 1200 × auto</div>
         <h1 id="hero-title" className="display">
-          <span className="ln">Your portfolio, run</span>
+          <span className="ln">Your real estate portfolio,</span>
           <span className="ln">
-            <span className="sel-word">
+            run{" "}<span className="sel-word">
               live
               <span className="box" aria-hidden="true"><i /><i /><i /><i /></span>
               <span className="dim" aria-hidden="true">21 agents</span>
@@ -106,8 +106,8 @@ export function Hero() {
           </span>
         </h1>
         <p className="sub">
-          RKV Consulting builds AI agents for real estate investors and investment firms. They answer seller leads, the
-          resident desk and late rent, close the books and draft your investor updates. You approve what matters.
+          RKV Consulting builds AI agents for investors and investment firms. They answer seller leads and residents,
+          chase late rent, close the books and draft investor updates. You approve what matters.
         </p>
         <div className="hero-ctas">
           <a className="btn btn-primary" href="#contact">Book a strategy call</a>

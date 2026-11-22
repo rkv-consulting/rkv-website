@@ -13,7 +13,7 @@ function Process() {
       <div className="wrap">
         <div className="sec-head">
           <span className="mono tag">/process · 4 phases</span>
-          <h2 id="process-title" className="h2 display">From the first call to a crew that runs itself.</h2>
+          <h2 id="process-title" className="h2 display">How an RKV engagement runs, in four steps</h2>
           <p className="lede">We find where hours and dollars leak, build the agents that plug those leaks, and stay on to tune them while they work.</p>
         </div>
         <div className="grid2">
@@ -21,12 +21,12 @@ function Process() {
             <div className="card-top"><span className="mono">01</span><span className="mono">/audit</span></div>
             <div className="viz">
               <div style={{ padding: 16, display: "grid", gap: 8 }}>
-                {["Seller leads · 41% unanswered after 1 hr", "Late rent · tracked in a spreadsheet", "Bills · coded by hand, 9 hrs / wk"].map((t, i) => (
-                  <div key={t} className="mono" style={{ background: "#fff", border: `1px solid ${i === 0 ? "#2F6BFF" : "var(--line)"}`, borderRadius: 8, padding: "8px 10px", color: "var(--ink-2)" }}>{t}</div>
+                {["Seller leads · no reply after hours", "Late rent · tracked in a spreadsheet", "Bills · coded by hand every week"].map((t, i) => (
+                  <div key={t} className="mono" style={{ background: "#fff", border: `1px solid ${i === 0 ? "#2557E8" : "var(--line)"}`, borderRadius: 8, padding: "8px 10px", color: "var(--ink-2)" }}>{t}</div>
                 ))}
-                <span className="mono" style={{ color: "#2F6BFF" }}>scanning · 3 leaks found</span>
+                <span className="mono" style={{ color: "#2557E8" }}>scanning · 3 leaks found</span>
               </div>
-              <NamedCursor name="Radar" color="#2F6BFF" style={{ right: 40, top: 22 }} />
+              <NamedCursor name="Radar" color="#2557E8" style={{ right: 40, top: 22 }} />
             </div>
             <h3>Find the leaks</h3>
             <p>We walk through your deals, properties and back office and list every task that eats time or loses money.</p>
@@ -100,8 +100,8 @@ function Output() {
       <div className="wrap">
         <div className="sec-head">
           <span className="mono tag">/output · real work</span>
-          <h2 id="output-title" className="h2 display">Not a chatbot. A crew that does the work.</h2>
-          <p className="lede">Every agent finishes real tasks in your real systems, logs what it did and hands you the decisions that are yours to make.</p>
+          <h2 id="output-title" className="h2 display">Agents that finish real work in your systems</h2>
+          <p className="lede">Each agent works in your own software, logs every step and hands you the decisions that are yours.</p>
         </div>
         <div className="bento">
           <BF as="article" className="card wide" size="1200 × 360">
@@ -110,10 +110,10 @@ function Output() {
                 <thead><tr><th>lead</th><th>source</th><th>first reply</th><th>status</th></tr></thead>
                 <tbody>
                   {[
-                    ["14 Birch Ln", "Direct mail", "0:41", "Call booked", "#0E9F6E"],
-                    ["902 Hill Rd", "PPC", "0:52", "Following up · day 3", "#2F6BFF"],
-                    ["77 Lake St", "Cold call", "0:38", "Offer sent", "#E0457B"],
-                    ["3 Cedar Ct", "Website", "0:47", "Nurture · 30 days", "#D97706"],
+                    ["Birch Ln", "Direct mail", "0:41", "Call booked", "#0B7D57"],
+                    ["Hill Rd", "PPC", "0:52", "Following up · day 3", "#2557E8"],
+                    ["Lake St", "Cold call", "0:38", "Offer sent", "#C2336A"],
+                    ["Cedar Ct", "Website", "0:47", "Nurture · 30 days", "#B45309"],
                   ].map((r) => (
                     <tr key={r[0]}><td>{r[0]}</td><td>{r[1]}</td><td>{r[2]}</td><td><span className="pill" style={{ background: `${r[4]}18`, color: r[4] }}>{r[3]}</span></td></tr>
                   ))}
@@ -138,7 +138,7 @@ function Output() {
               <span className="mono">Q3 investor update · Fund II · draft</span>
               <div style={{ fontWeight: 600, fontSize: 17 }}>Occupancy held at 96% and we closed on Elm Street.</div>
               {[92, 100, 76, 88].map((w, i) => <i key={i} style={{ display: "block", height: 7, width: `${w}%`, background: "var(--line)", borderRadius: 4 }} />)}
-              <span className="mono" style={{ color: "#E0457B" }}>waiting for your approval</span>
+              <span className="mono" style={{ color: "#C2336A" }}>waiting for your approval</span>
             </div>
             <h3>Investor updates from real numbers</h3>
             <p>Drafted from your books and rent roll, sent only after you sign off.</p>
@@ -159,7 +159,7 @@ function Output() {
                 </div>
               ))}
             </div>
-            <h3>Your rules, not ours</h3>
+            <h3>Approval rules you set</h3>
             <p>You decide what agents may do alone and what always waits for you.</p>
           </BF>
         </div>
@@ -174,10 +174,10 @@ function Scenarios() {
       <div className="wrap">
         <div className="sec-head">
           <span className="mono tag">/week · with RKV</span>
-          <h2 id="week-title" className="h2 display">Owners spend time on deals. The crew handles the rest.</h2>
+          <h2 id="week-title" className="h2 display">A week on your portfolio with the crew</h2>
         </div>
         <BF className="featured" size="1200 × 420">
-          <span className="mono" style={{ color: "#E0457B" }}>/example week · 40-unit portfolio</span>
+          <span className="mono" style={{ color: "#C2336A" }}>/example week · 40-unit portfolio</span>
           <blockquote>&ldquo;By Monday at 7 am you know the three things that need you. Everything else already happened.&rdquo;</blockquote>
           <div className="timeline">
             {[
@@ -206,7 +206,7 @@ function Faq() {
         <div>
           <span className="mono tag">/faq</span>
           <h2 id="faq-title" className="h2 display">Questions, answered.</h2>
-          <p className="lede" style={{ marginBottom: 20 }}>Want to talk it through? You get a person, not an agent.</p>
+          <p className="lede" style={{ marginBottom: 20 }}>Want to talk it through? You get a person on the call.</p>
           <a className="link-arrow" href="#contact">Contact us <span>→</span></a>
         </div>
         <div className="faq">
@@ -228,14 +228,13 @@ function Ship() {
       <div className="wrap">
         <BF className="ship-box" size="1200 × 460">
           <span className="mono">/start</span>
-          <h2 id="ship-title" className="display">Give your portfolio<br />a crew.</h2>
+          <h2 id="ship-title" className="h2 display">Give your portfolio<br />a crew.</h2>
           <p>Book a 30-minute call. We&apos;ll find your three biggest leaks and show you the agents that fix them.</p>
           <div className="hero-ctas">
             <a className="btn btn-primary" href={CONTACT.calendly}>Book a strategy call</a>
             <a className="btn btn-ghost" href={`mailto:${CONTACT.email}`}>Email us</a>
           </div>
-          <div className="mono">{CONTACT.email} · {CONTACT.phone}</div>
-        </BF>
+                  </BF>
       </div>
     </section>
   );
@@ -248,7 +247,7 @@ function Footer() {
         <div className="foot-cta">
           <div>
             <span className="mono">/footer · 1200 × auto</span>
-            <h3 className="display">Your first agent is one call away.</h3>
+            <p className="display foot-line">Your first agent is one call away.</p>
           </div>
           <div className="btns">
             <a className="btn btn-primary" href="#contact">Book a call</a>
@@ -312,7 +311,7 @@ export default function Page() {
           <div className="wrap">
             <div className="sec-head">
               <span className="mono tag">/crew · 21 agents</span>
-              <h2 id="agents-title" className="h2 display">One crew. Six departments. Twenty-one agents.</h2>
+              <h2 id="agents-title" className="h2 display">21 agents across six departments</h2>
               <p className="lede">Every agent owns one job and they all share one picture of your portfolio. Pick a department to see who&apos;s on it.</p>
             </div>
             <Crew />

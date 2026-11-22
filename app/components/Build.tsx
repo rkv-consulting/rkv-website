@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { CursorIcon } from "./Logo";
 import { DEPTS } from "../data";
 
-const RING_COLORS = ["#2F6BFF", "#0E9F6E", "#D97706", "#E0457B", "#0891B2", "#0B1215", "#14A385", "#5B8CFF", "#F59E0B", "#10B981", "#EF6A9A", "#22B8CF"];
+const RING_COLORS = ["#2557E8", "#0B7D57", "#B45309", "#C2336A", "#0E7490", "#0B1215", "#14A385", "#5B8CFF", "#F59E0B", "#10B981", "#EF6A9A", "#22B8CF"];
 const TOTAL_TASKS = 640;
 
 /** Wraps a block so it shows as a dashed frame until it scrolls into view, then "builds". */
@@ -102,7 +102,7 @@ export function BuildController() {
       (el.parentElement as HTMLElement).style.display = "none";
       return;
     }
-    let tx = window.innerWidth * 0.72, ty = window.innerHeight * 0.32;
+    let tx = window.innerWidth * 0.86, ty = window.innerHeight * 0.78;
     let x = tx, y = ty, raf = 0, last = performance.now();
     const move = (e: PointerEvent) => { tx = e.clientX; ty = e.clientY; last = performance.now(); };
     const tick = (t: number) => {
