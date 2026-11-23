@@ -73,7 +73,7 @@ export function BuildEngine() {
       const set = new Set<HTMLElement>();
       document.querySelectorAll<HTMLElement>("main, footer").forEach((scope) => {
         scope.querySelectorAll<HTMLElement>(`${FRAME_SEL},${LEAF_SEL}`).forEach((el) => {
-          if (el.closest(".acur, .bl-overlay, .mobile-menu, .skip, .film-canvas")) return;
+          if (el.closest(".acur, .bl-overlay, .mobile-menu, .skip, .film-canvas, .demo-dlg")) return;
           set.add(el);
         });
       });

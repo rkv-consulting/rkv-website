@@ -6,6 +6,7 @@ import { Nav, Stats, Crew, DrawBars, SmsThread } from "./components/Interactive"
 import { LogoMark } from "./components/Logo";
 import { DEPTS, FAQ, CONTACT, bookHref } from "./data";
 import { ContactForm } from "./components/ContactForm";
+import { Demos } from "./components/Demos";
 
 const SYSTEMS = ["Property management", "Accounting", "CRM", "Phone and SMS", "Email", "Shared drive", "Loan servicing", "County records"];
 
@@ -245,38 +246,6 @@ function Scale() {
               <div className="tier-bars" aria-hidden="true">{Array.from({ length: 6 }).map((_, i) => <i key={i} className={i < x.bars ? "on" : ""} />)}</div>
               <h3>{x.t}</h3>
               <p>{x.d}</p>
-            </BF>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Demos() {
-  const vids = [
-    { t: "Lead Leak Fix answers a seller at 2 am", d: "Acquisitions · 60 s" },
-    { t: "The resident desk handles a late-rent text", d: "Operations · 45 s" },
-    { t: "The Brain writes the Monday brief", d: "The Brain · 60 s" },
-  ];
-  return (
-    <section className="sec" id="demos" aria-labelledby="demos-title" style={{ paddingTop: 0 }}>
-      <div className="wrap">
-        <div className="sec-head">
-          <span className="mono tag">/demos · narrated walkthroughs</span>
-          <h2 id="demos-title" className="h2 display">Watch the agents do the work</h2>
-          <p className="lede">Short narrated walkthroughs of real agent runs. New demos are on the way.</p>
-        </div>
-        <div className="grid3">
-          {vids.map((v) => (
-            <BF as="article" className="card demo" key={v.t} size="389 × 320">
-              <div className="demo-frame" aria-hidden="true">
-                <span className="demo-play"><svg width="18" height="18" viewBox="0 0 14 14"><path d="M4 2.5v9l7.5-4.5z" fill="currentColor" /></svg></span>
-                <span className="mono demo-soon">Coming soon</span>
-                <span className="demo-wave">{Array.from({ length: 28 }).map((_, i) => <i key={i} style={{ animationDelay: `${(i % 7) * 0.11}s` }} />)}</span>
-              </div>
-              <h3>{v.t}</h3>
-              <p className="mono">{v.d}</p>
             </BF>
           ))}
         </div>
