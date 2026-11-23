@@ -8,7 +8,8 @@ let master: GainNode | null = null;
 let muted = false;
 const last: Record<string, number> = {};
 
-try { muted = localStorage.getItem("rkv-sound") === "off"; } catch { /* storage blocked */ }
+// Sound is on by default. (New storage key so an old "off" from earlier versions doesn't stick.)
+try { muted = localStorage.getItem("rkv-sound-v2") === "off"; } catch { /* storage blocked */ }
 
 export function unlock() {
   if (ctx) { if (ctx.state === "suspended") ctx.resume().catch(() => {}); return; }
@@ -21,9 +22,10 @@ export function unlock() {
 }
 
 export const isMuted = () => muted;
+export const isRunning = () => !!ctx && ctx.state === "running";
 export function setMuted(m: boolean) {
   muted = m;
-  try { localStorage.setItem("rkv-sound", m ? "off" : "on"); } catch { /* storage blocked */ }
+  try { localStorage.setItem("rkv-sound-v2", m ? "off" : "on"); } catch { /* storage blocked */ }
   if (ctx && master) master.gain.setTargetAtTime(m ? 0 : 1, ctx.currentTime, 0.02);
 }
 
