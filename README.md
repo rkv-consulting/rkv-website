@@ -10,3 +10,7 @@ npm run build
 
 Content (departments, agents, FAQ, contact placeholders) lives in `app/data.ts`.
 Deploy: import this repo in Vercel; no settings needed.
+
+## Deploy
+
+Hosted on Vercel (project `rkv-website`, team kd-brand-hq). Every push to `main` deploys to production.
