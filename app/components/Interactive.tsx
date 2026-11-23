@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { DEPTS, ALL_AGENTS } from "../data";
+import { DEPTS, ALL_AGENTS, bookHref } from "../data";
 import { CursorIcon, Logo } from "./Logo";
 import { BF } from "./Build";
 
@@ -20,7 +20,7 @@ export function Nav() {
         <nav className="nav-links" aria-label="Main">
           {links.map(([l, h]) => <a key={h} href={h}>{l}</a>)}
         </nav>
-        <a className="btn btn-primary btn-sm" href="#contact">Book a call</a>
+        <a className="btn btn-primary btn-sm" href={bookHref()} target="_blank" rel="noopener noreferrer">Book a call</a>
         <button className="menu-btn" type="button" aria-expanded={open} aria-controls="mobile-menu" aria-label="Menu" onClick={() => setOpen(!open)}>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
             {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
@@ -29,7 +29,7 @@ export function Nav() {
       </div>
       <div id="mobile-menu" className={`mobile-menu ${open ? "open" : ""}`}>
         {links.map(([l, h]) => <a key={h} href={h} onClick={() => setOpen(false)}>{l}</a>)}
-        <a className="btn btn-primary" href="#contact" onClick={() => setOpen(false)}>Book a call</a>
+        <a className="btn btn-primary" href={bookHref()} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}>Book a call</a>
       </div>
     </header>
   );
@@ -111,7 +111,7 @@ export function Crew() {
               <span className="mono">{d ? `${d.agents.length} agents` : "21 agents · 6 departments"}</span>
               <h3>{d ? d.name : "The whole crew"}</h3>
               <p>{d ? d.blurb : "Every agent shares one picture of your portfolio, and The Brain reads them all."}</p>
-              <a className="link-arrow" href="#contact">Start with {d ? d.name.toLowerCase() : "one department"} <span>→</span></a>
+              <a className="link-arrow" href={bookHref()} target="_blank" rel="noopener noreferrer">Start with {d ? d.name.toLowerCase() : "one department"} <span>→</span></a>
             </article>
           );
         })()}

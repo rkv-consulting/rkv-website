@@ -264,7 +264,7 @@ function Ship() {
             <h2 id="ship-title" className="h2 display">Give your portfolio<br />a crew.</h2>
             <p>Book a 30-minute call. We&apos;ll find your three biggest leaks and show you the agents that fix them.</p>
             <div className="hero-ctas">
-              <a className="btn btn-primary" href={bookHref()}>Book a strategy call</a>
+              <a className="btn btn-primary" href={bookHref()} target="_blank" rel="noopener noreferrer">Book a strategy call</a>
               <a className="btn btn-ghost" href={`tel:${CONTACT.tel}`}>Call {CONTACT.phone}</a>
             </div>
             <ul className="ship-contact">
@@ -289,7 +289,7 @@ function Footer() {
             <p className="display foot-line">Your first agent is one call away.</p>
           </div>
           <div className="btns">
-            <a className="btn btn-primary" href={bookHref()}>Book a call</a>
+            <a className="btn btn-primary" href={bookHref()} target="_blank" rel="noopener noreferrer">Book a call</a>
             <a className="btn btn-ghost" href="#agents">See all 21 agents</a>
           </div>
         </div>
@@ -314,7 +314,7 @@ function Footer() {
           </div>
           <div>
             <h5>CONTACT</h5>
-            <ul><li><a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a></li><li><a href={`tel:${CONTACT.tel}`}>{CONTACT.phone}</a></li><li><a href={bookHref()}>Book a call</a></li><li>{CONTACT.address}</li></ul>
+            <ul><li><a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a></li><li><a href={`tel:${CONTACT.tel}`}>{CONTACT.phone}</a></li><li><a href={bookHref()} target="_blank" rel="noopener noreferrer">Book a call</a></li><li>{CONTACT.address}</li></ul>
           </div>
         </div>
         <div className="wordmark" aria-hidden="true">RKV</div>

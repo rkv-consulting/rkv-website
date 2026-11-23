@@ -104,8 +104,8 @@ export const CONTACT = {
   email: "kishanramnath@rkv-consulting.com",
   phone: "(484) 432-2066",
   tel: "+14844322066",
-  // Calendly link to come. Until then "Book a call" opens an email asking for a time.
-  calendly: "",
+  // Booking page (Cal.com).
+  calendly: "https://cal.com/rkvconsulting/audit",
   legalName: "RKV Consulting LLC",
   address: "Business address coming soon",
 };

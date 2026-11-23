@@ -1,6 +1,7 @@
 "use client";
 import { BF } from "./Build";
 import { FilmPlayer } from "./film/FilmPlayer";
+import { bookHref } from "../data";
 
 export function Hero() {
   return (
@@ -20,16 +21,20 @@ export function Hero() {
           </span>
         </h1>
         <p className="sub">
-          From one agent for a small team to a full system across 1,000+ doors. RKV agents answer leads and residents,
-          chase rent, close the books and draft investor updates inside the systems you already run. You approve what matters.
+          One agent for a small team or a full system across 1,000+ doors. Agents answer leads and residents, chase rent,
+          close the books and draft investor updates in the systems you already run.
         </p>
         <div className="hero-ctas">
-          <a className="btn btn-primary" href="#contact">Book a strategy call</a>
+          <a className="btn btn-primary btn-xl" href={bookHref()} target="_blank" rel="noopener noreferrer">
+            Book your free audit call
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+          </a>
           <button type="button" className="btn btn-ghost" onClick={() => window.dispatchEvent(new Event("rkv:replay"))}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5" /></svg>
             Watch the agents build
           </button>
         </div>
+        <p className="hero-book mono">30 minutes · free portfolio audit · pick any time on the calendar</p>
         <div className="mono hero-hint">Scroll to build · Stop and the crew circles your cursor · Esc skips</div>
 
         <BF size="Film · 1200 × 600" className="stage-bf">

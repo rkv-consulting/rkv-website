@@ -220,6 +220,7 @@ export function BuildEngine() {
       const dt = Math.min(0.05, Math.max(0.001, (t - lastT) / 1000));
       lastT = t;
       const hasPtr = px >= 0 && fine;
+      root.classList.toggle("bl-top", window.scrollY < 140);
       if (hasPtr) {
         if (ax < 0) { ax = px; ay = py; }
         const sm = 1 - Math.exp(-dt * 30);
@@ -372,7 +373,7 @@ export function BuildEngine() {
       window.removeEventListener("touchstart", stopTour);
       layers.forEach((l) => l.el.removeAttribute("data-bl"));
       overlay.remove(); line.remove(); rulerTop.remove(); rulerLeft.remove();
-      root.classList.remove("bl-on");
+      root.classList.remove("bl-on", "bl-top");
     };
   }, []);
 
