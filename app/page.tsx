@@ -7,6 +7,7 @@ import { LogoMark } from "./components/Logo";
 import { DEPTS, FAQ, CONTACT, bookHref } from "./data";
 import { ContactForm } from "./components/ContactForm";
 import { Demos } from "./components/Demos";
+import { SoundToggle } from "./components/SoundToggle";
 
 const SYSTEMS = ["Property management", "Accounting", "CRM", "Phone and SMS", "Email", "Shared drive", "Loan servicing", "County records"];
 
@@ -365,6 +366,7 @@ export default function Page() {
       </main>
       <Footer />
       <BuildEngine />
+      <SoundToggle />
     </>
   );
 }

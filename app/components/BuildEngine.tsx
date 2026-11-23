@@ -7,6 +7,7 @@
  */
 import { useEffect, useRef, useState } from "react";
 import { DEPTS } from "../data";
+import * as sfx from "./sfx";
 
 const AGENTS = DEPTS.flatMap((d) => d.agents.map((a) => ({ name: a.code, color: d.color })));
 const ARROW = '<svg viewBox="0 0 18 18" width="18" height="18"><path d="M2 1.5v13.2l3.6-3.4 2.5 5 2.3-1.1-2.5-4.9 5-.4z" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/></svg>';
@@ -157,6 +158,7 @@ export function BuildEngine() {
       l.state = 2;
       doneCount++;
       reveal(l, !animate);
+      if (animate) sfx.tick();
     }
 
     // ---------- pointer ----------
@@ -307,6 +309,7 @@ export function BuildEngine() {
       if (!finished && total > 0 && doneCount >= total) {
         finished = true;
         line.classList.add("done");
+        sfx.chime();
         setStat({ done: total, total, finished: true, secs: (performance.now() - startT) / 1000 });
       } else if (!finished && frame % 8 === 0) {
         setStat({ done: doneCount, total, finished: false, secs: 0 });
