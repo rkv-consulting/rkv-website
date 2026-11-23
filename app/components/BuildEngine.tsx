@@ -27,7 +27,7 @@ const TEXT_SEL = "h1,h2,h3,h5,p,blockquote,.mono,.num,.tools span,.foot-main li,
 type Layer = { el: HTMLElement; top: number; parent: number; state: 0 | 1 | 2; text: boolean };
 type Agent = {
   name: string; color: string; node: HTMLDivElement; chip: HTMLSpanElement;
-  x: number; y: number; task: number; phase: 0 | 1 | 2 | 3; t0: number; fx: number; fy: number;
+  x: number; y: number; rot: number; k: number; task: number; phase: 0 | 1 | 2 | 3; t0: number; fx: number; fy: number;
   box?: { x: number; y: number; w: number; h: number }; rect?: HTMLDivElement; dur: number;
 };
 
@@ -73,7 +73,7 @@ export function BuildEngine() {
       const set = new Set<HTMLElement>();
       document.querySelectorAll<HTMLElement>("main, footer").forEach((scope) => {
         scope.querySelectorAll<HTMLElement>(`${FRAME_SEL},${LEAF_SEL}`).forEach((el) => {
-          if (el.closest(".acur, .bl-overlay, .mobile-menu, .skip")) return;
+          if (el.closest(".acur, .bl-overlay, .mobile-menu, .skip, .film-canvas")) return;
           set.add(el);
         });
       });
@@ -108,7 +108,7 @@ export function BuildEngine() {
       node.appendChild(chip);
       overlay.appendChild(node);
       const x = window.innerWidth * (0.55 + 0.3 * Math.cos(i)), y = window.scrollY + window.innerHeight * (0.5 + 0.2 * Math.sin(i));
-      return { ...a, node, chip, x, y, task: -1, phase: 0, t0: 0, fx: x, fy: y, dur: 0 };
+      return { ...a, node, chip, x, y, rot: 0, k: 13 + (i % 7) * 1.1, task: -1, phase: 0, t0: 0, fx: x, fy: y, dur: 0 };
     });
 
     let queue: number[] = [];
@@ -161,45 +161,53 @@ export function BuildEngine() {
 
     // ---------- pointer ----------
     let px = -1, py = -1, lastMove = 0;
-    const onMove = (e: PointerEvent) => { px = e.clientX; py = e.clientY; lastMove = performance.now(); };
+    const onMove = (e: PointerEvent) => { if (e.pointerType !== "mouse" && e.pointerType !== "pen") return; px = e.clientX; py = e.clientY; lastMove = performance.now(); };
+    const onLeave = (e: PointerEvent) => { if (!e.relatedTarget) px = -1; };
     window.addEventListener("pointermove", onMove, { passive: true });
+    document.addEventListener("pointerout", onLeave, { passive: true });
 
     // ---------- rulers ----------
     const dpr = Math.min(2, window.devicePixelRatio || 1);
+    const css = getComputedStyle(root);
+    const bg = css.getPropertyValue("--ruler-bg").trim() || "#fafafa";
+    const tickC = css.getPropertyValue("--ruler-tick").trim() || "#cfcfcf";
+    const txt = css.getPropertyValue("--ruler-text").trim() || "#7a7a7a";
+    const sel = "rgba(10,10,10,0.09)";
+    let rulerSig = "", rw = 0, rh = 0;
     const drawRulers = () => {
       if (window.innerWidth < 820) return;
       const W = window.innerWidth, H = window.innerHeight;
-      const css = getComputedStyle(root);
-      const bg = css.getPropertyValue("--ruler-bg").trim() || "#f6f7f6";
-      const tick = css.getPropertyValue("--ruler-tick").trim() || "#c9cfd3";
-      const txt = css.getPropertyValue("--ruler-text").trim() || "#7d858d";
-      const sel = "rgba(47,107,255,0.22)";
       const spans: { x0: number; x1: number; y0: number; y1: number }[] = [];
       agents.forEach((a) => { if (a.box && a.phase >= 2) spans.push({ x0: a.box.x, x1: a.box.x + a.box.w, y0: a.box.y, y1: a.box.y + a.box.h }); });
+      const sig = `${W},${H},${Math.round(window.scrollY)},${spans.map((q) => `${q.x0|0}:${q.y0|0}`).join(";")}`;
+      if (sig === rulerSig) return;
+      rulerSig = sig;
+      if (rw !== W || rh !== H) { rw = W; rh = H; rulerTop.width = W * dpr; rulerTop.height = 18 * dpr; rulerLeft.width = 18 * dpr; rulerLeft.height = H * dpr; }
       // top
-      rulerTop.width = W * dpr; rulerTop.height = 18 * dpr;
-      let c = rulerTop.getContext("2d")!; c.scale(dpr, dpr);
+      let c = rulerTop.getContext("2d")!; c.setTransform(dpr, 0, 0, dpr, 0, 0);
       c.fillStyle = bg; c.fillRect(0, 0, W, 18);
       c.fillStyle = sel; spans.forEach((s) => c.fillRect(s.x0, 0, s.x1 - s.x0, 18));
-      c.fillStyle = tick; c.font = "9px ui-monospace, monospace";
+      c.fillStyle = tickC; c.font = "9px ui-monospace, monospace";
       for (let x = 0; x < W; x += 10) { const h = x % 100 === 0 ? 18 : x % 50 === 0 ? 8 : 4; c.fillRect(x, 18 - h, 1, h); }
       c.fillStyle = txt; for (let x = 100; x < W; x += 100) c.fillText(String(x), x + 3, 9);
-      c.fillStyle = tick; c.fillRect(0, 17, W, 1);
+      c.fillStyle = tickC; c.fillRect(0, 17, W, 1);
       // left
-      rulerLeft.width = 18 * dpr; rulerLeft.height = H * dpr;
-      c = rulerLeft.getContext("2d")!; c.scale(dpr, dpr);
+      c = rulerLeft.getContext("2d")!; c.setTransform(dpr, 0, 0, dpr, 0, 0);
       c.fillStyle = bg; c.fillRect(0, 0, 18, H);
       const sy = window.scrollY;
       c.fillStyle = sel; spans.forEach((s) => c.fillRect(0, s.y0 - sy, 18, s.y1 - s.y0));
-      c.fillStyle = tick;
+      c.fillStyle = tickC;
       for (let y = Math.floor(sy / 10) * 10; y < sy + H; y += 10) { const w = y % 100 === 0 ? 18 : y % 50 === 0 ? 8 : 4; c.fillRect(18 - w, y - sy, w, 1); }
       c.fillStyle = txt;
       for (let y = Math.ceil(sy / 100) * 100; y < sy + H; y += 100) { c.save(); c.translate(9, y - sy + 4); c.rotate(-Math.PI / 2); c.fillText(String(y), -String(y).length * 5.4 - 2, 0); c.restore(); }
-      c.fillStyle = tick; c.fillRect(17, 0, 1, H);
+      c.fillStyle = tickC; c.fillRect(17, 0, 1, H);
     };
 
     // ---------- main loop ----------
-    let raf = 0, frame = 0;
+    let raf = 0, frame = 0, lastT = performance.now();
+    // smoothed pointer anchor for the ring, and how fast the pointer is moving
+    let ax = -1, ay = -1, pv = 0, lpx = -1, lpy = -1;
+    const angDiff = (a: number, b: number) => { let d = (b - a) % 360; if (d > 180) d -= 360; if (d < -180) d += 360; return d; };
     const makeRect = (a: Agent) => {
       const r = document.createElement("div");
       r.className = "bl-rect";
@@ -209,10 +217,20 @@ export function BuildEngine() {
     };
     const tick = (t: number) => {
       frame++;
+      const dt = Math.min(0.05, Math.max(0.001, (t - lastT) / 1000));
+      lastT = t;
+      const hasPtr = px >= 0 && fine;
+      if (hasPtr) {
+        if (ax < 0) { ax = px; ay = py; }
+        const sm = 1 - Math.exp(-dt * 30);
+        ax += (px - ax) * sm; ay += (py - ay) * sm;
+        if (lpx >= 0) pv += (Math.hypot(px - lpx, py - lpy) / dt - pv) * (1 - Math.exp(-dt * 8));
+        lpx = px; lpy = py;
+      } else { ax = -1; lpx = -1; pv = 0; }
       enqueue();
       const backlog = queue.length;
       const speed = backlog > agents.length * 4 ? 0.4 : backlog > agents.length * 2 ? 0.65 : 0.9;
-      const idle = performance.now() - lastMove > 450 && px >= 0 && fine;
+      void lastMove;
       let ringIdx = 0;
       const ringN = agents.filter((a) => a.task < 0).length;
 
@@ -252,19 +270,33 @@ export function BuildEngine() {
             }
           }
           a.chip.style.opacity = "1";
+          a.node.style.opacity = "1";
         } else {
-          // idle: ring round the pointer, or park beside the build line
-          const ang = (ringIdx / Math.max(ringN, 1)) * Math.PI * 2 + t * 0.0006;
+          // idle: a clean ring that tracks the pointer; without a pointer, park beside the build line
+          const ang = (ringIdx / Math.max(ringN, 1)) * Math.PI * 2 + t * 0.00035;
           ringIdx++;
           let tx: number, ty: number;
-          if (idle) { tx = px + Math.cos(ang) * 58; ty = py + window.scrollY + Math.sin(ang) * 58; }
-          else { tx = window.innerWidth * (window.innerWidth < 820 ? 0.5 : 0.78) + Math.cos(ang) * 64; ty = window.scrollY + lineY() - 110 + Math.sin(ang) * 64; }
-          a.x += (tx - a.x) * 0.09; a.y += (ty - a.y) * 0.09;
+          if (hasPtr) {
+            const rad = 40 + Math.min(ringN, 21) * 1.1 + Math.min(26, pv * 0.02);
+            tx = ax + Math.cos(ang) * rad; ty = ay + window.scrollY + Math.sin(ang) * rad;
+          } else {
+            tx = window.innerWidth * (window.innerWidth < 820 ? 0.5 : 0.78) + Math.cos(ang) * 64;
+            ty = window.scrollY + lineY() - 110 + Math.sin(ang) * 64;
+          }
+          const sm = 1 - Math.exp(-dt * (hasPtr ? a.k : 4));
+          a.x += (tx - a.x) * sm; a.y += (ty - a.y) * sm;
           a.chip.style.opacity = "0";
-          a.node.style.setProperty("--rot", `${(ang * 180) / Math.PI - 45}deg`);
+          // on touch screens idle agents step aside so they never sit on top of the text
+          a.node.style.opacity = fine ? "1" : "0";
+          // arrow tip points at the pointer (the arrow artwork points up-left, i.e. -135deg)
+          const cx = hasPtr ? ax : window.innerWidth * (window.innerWidth < 820 ? 0.5 : 0.78);
+          const cy = hasPtr ? ay + window.scrollY : window.scrollY + lineY() - 110;
+          const want = (Math.atan2(cy - a.y, cx - a.x) * 180) / Math.PI + 135;
+          a.rot += angDiff(a.rot, want) * (1 - Math.exp(-dt * 12));
+          a.node.style.setProperty("--rot", `${a.rot.toFixed(1)}deg`);
         }
         a.node.classList.toggle("ring", a.task < 0);
-        a.node.style.transform = `translate(${a.x}px, ${a.y}px)`;
+        a.node.style.transform = `translate3d(${a.x.toFixed(1)}px, ${a.y.toFixed(1)}px, 0)`;
       }
 
       if (frame % 10 === 0 && ghosts.length) {
@@ -333,6 +365,7 @@ export function BuildEngine() {
       cancelAnimationFrame(raf);
       ro.disconnect();
       window.removeEventListener("pointermove", onMove);
+      document.removeEventListener("pointerout", onLeave);
       window.removeEventListener("keydown", onKey);
       window.removeEventListener("rkv:replay", replay);
       window.removeEventListener("wheel", stopTour);

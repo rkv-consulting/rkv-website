@@ -4,9 +4,10 @@ import { Hero } from "./components/Hero";
 import { Workspace } from "./components/Workspace";
 import { Nav, Stats, Crew, DrawBars, SmsThread } from "./components/Interactive";
 import { LogoMark } from "./components/Logo";
-import { DEPTS, FAQ, CONTACT } from "./data";
+import { DEPTS, FAQ, CONTACT, bookHref } from "./data";
+import { ContactForm } from "./components/ContactForm";
 
-const TOOLS = ["AppFolio", "Buildium", "Yardi", "Rent Manager", "QuickBooks", "Gmail", "Outlook", "Google Drive", "Twilio", "Podio"];
+const SYSTEMS = ["Property management", "Accounting", "CRM", "Phone and SMS", "Email", "Shared drive", "Loan servicing", "County records"];
 
 function Process() {
   return (
@@ -23,11 +24,11 @@ function Process() {
             <div className="viz">
               <div style={{ padding: 16, display: "grid", gap: 8 }}>
                 {["Seller leads · no reply after hours", "Late rent · tracked in a spreadsheet", "Bills · coded by hand every week"].map((t, i) => (
-                  <div key={t} className="mono" style={{ background: "#fff", border: `1px solid ${i === 0 ? "#2557E8" : "var(--line)"}`, borderRadius: 8, padding: "8px 10px", color: "var(--ink-2)" }}>{t}</div>
+                  <div key={t} className="mono" style={{ background: "#fff", border: `1px solid ${i === 0 ? "#111111" : "var(--line)"}`, borderRadius: 8, padding: "8px 10px", color: "var(--ink-2)" }}>{t}</div>
                 ))}
-                <span className="mono" style={{ color: "#2557E8" }}>scanning · 3 leaks found</span>
+                <span className="mono" style={{ color: "#111111" }}>scanning · 3 leaks found</span>
               </div>
-              <NamedCursor name="Radar" color="#2557E8" style={{ right: 40, top: 22 }} />
+              <NamedCursor name="Radar" color="#111111" style={{ right: 40, top: 22 }} />
             </div>
             <h3>Find the leaks</h3>
             <p>We walk through your deals, properties and back office and list every task that eats time or loses money.</p>
@@ -36,10 +37,10 @@ function Process() {
             <div className="card-top"><span className="mono">02</span><span className="mono">/design</span></div>
             <div className="viz">
               <svg viewBox="0 0 400 170" width="100%" height="100%" aria-hidden="true">
-                <g fill="none" stroke="#cfd6d3" strokeWidth="1.2">
+                <g fill="none" stroke="#d4d4d4" strokeWidth="1.2">
                   {[60, 140, 220, 300, 360].map((x, i) => <path key={i} className="pulse-line" d={`M200 46 C200 90 ${x} 80 ${x} 120`} />)}
                 </g>
-                <rect x="150" y="20" width="100" height="28" rx="7" fill="#0B1215" />
+                <rect x="150" y="20" width="100" height="28" rx="7" fill="#0A0A0A" />
                 <text x="200" y="38" textAnchor="middle" fontSize="11" fill="#fff" fontFamily="monospace">The Brain</text>
                 {DEPTS.slice(0, 5).map((d, i) => {
                   const x = [60, 140, 220, 300, 360][i];
@@ -78,7 +79,7 @@ function Process() {
                 <span className="btn btn-primary btn-sm" aria-hidden="true">✓ Approved</span>
                 <span className="mono" style={{ display: "inline-flex", gap: 8, alignItems: "center" }}><span className="dot" />live · 21 agents working</span>
               </div>
-              <NamedCursor name="Brain" color="#14A385" style={{ left: "62%", top: "58%" }} />
+              <NamedCursor name="Brain" color="#0A0A0A" style={{ left: "62%", top: "58%" }} />
             </div>
             <h3>Run, review, improve</h3>
             <p>The crew works around the clock. You approve the big calls, we read the logs every week and tune the agents.</p>
@@ -111,10 +112,10 @@ function Output() {
                 <thead><tr><th>lead</th><th>source</th><th>first reply</th><th>status</th></tr></thead>
                 <tbody>
                   {[
-                    ["Birch Ln", "Direct mail", "0:41", "Call booked", "#0B7D57"],
-                    ["Hill Rd", "PPC", "0:52", "Following up · day 3", "#2557E8"],
-                    ["Lake St", "Cold call", "0:38", "Offer sent", "#C2336A"],
-                    ["Cedar Ct", "Website", "0:47", "Nurture · 30 days", "#B45309"],
+                    ["Birch Ln", "Direct mail", "0:41", "Call booked", "#2E2E2E"],
+                    ["Hill Rd", "PPC", "0:52", "Following up · day 3", "#111111"],
+                    ["Lake St", "Cold call", "0:38", "Offer sent", "#575757"],
+                    ["Cedar Ct", "Website", "0:47", "Nurture · 30 days", "#454545"],
                   ].map((r) => (
                     <tr key={r[0]}><td>{r[0]}</td><td>{r[1]}</td><td>{r[2]}</td><td><span className="pill" style={{ background: `${r[4]}18`, color: r[4] }}>{r[3]}</span></td></tr>
                   ))}
@@ -139,7 +140,7 @@ function Output() {
               <span className="mono">Q3 investor update · Fund II · draft</span>
               <div style={{ fontWeight: 600, fontSize: 17 }}>Occupancy held at 96% and we closed on Elm Street.</div>
               {[92, 100, 76, 88].map((w, i) => <i key={i} style={{ display: "block", height: 7, width: `${w}%`, background: "var(--line)", borderRadius: 4 }} />)}
-              <span className="mono" style={{ color: "#C2336A" }}>waiting for your approval</span>
+              <span className="mono" style={{ color: "#575757" }}>waiting for your approval</span>
             </div>
             <h3>Investor updates from real numbers</h3>
             <p>Drafted from your books and rent roll, sent only after you sign off.</p>
@@ -178,7 +179,7 @@ function Scenarios() {
           <h2 id="week-title" className="h2 display">A week on your portfolio with the crew</h2>
         </div>
         <BF className="featured" size="1200 × 420">
-          <span className="mono" style={{ color: "#C2336A" }}>/example week · 40-unit portfolio</span>
+          <span className="mono" style={{ color: "#575757" }}>/example week · 40-unit portfolio</span>
           <blockquote>&ldquo;By Monday at 7 am you know the three things that need you. Everything else already happened.&rdquo;</blockquote>
           <div className="timeline">
             {[
@@ -223,19 +224,87 @@ function Faq() {
   );
 }
 
+function Scale() {
+  const tiers = [
+    { k: "01", t: "One agent", who: "Small teams and solo investors", d: "Start with the job that leaks the most, like seller leads or late-night resident calls. Live in one to two weeks.", bars: 1 },
+    { k: "02", t: "A department", who: "Growing portfolios", d: "A crew that runs one side of the business, such as acquisitions or the back office, with shared rules and one log.", bars: 3 },
+    { k: "03", t: "The full system", who: "Operators and funds with 1,000+ doors", d: "All six departments plus The Brain, connected to your systems and tuned with your team every week.", bars: 6 },
+  ];
+  return (
+    <section className="sec" id="scale" aria-labelledby="scale-title" style={{ paddingTop: 0 }}>
+      <div className="wrap">
+        <div className="sec-head">
+          <span className="mono tag">/scale · 1 to 1,000+ doors</span>
+          <h2 id="scale-title" className="h2 display">Start with one agent. Grow into a full system.</h2>
+          <p className="lede">Every agent works on its own or as part of the crew, so you add more as the portfolio grows.</p>
+        </div>
+        <div className="grid3">
+          {tiers.map((x) => (
+            <BF as="article" className="card tier" key={x.k} size="389 × 300">
+              <div className="card-top"><span className="mono">{x.k}</span><span className="mono">{x.who}</span></div>
+              <div className="tier-bars" aria-hidden="true">{Array.from({ length: 6 }).map((_, i) => <i key={i} className={i < x.bars ? "on" : ""} />)}</div>
+              <h3>{x.t}</h3>
+              <p>{x.d}</p>
+            </BF>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Demos() {
+  const vids = [
+    { t: "Lead Leak Fix answers a seller at 2 am", d: "Acquisitions · 60 s" },
+    { t: "The resident desk handles a late-rent text", d: "Operations · 45 s" },
+    { t: "The Brain writes the Monday brief", d: "The Brain · 60 s" },
+  ];
+  return (
+    <section className="sec" id="demos" aria-labelledby="demos-title" style={{ paddingTop: 0 }}>
+      <div className="wrap">
+        <div className="sec-head">
+          <span className="mono tag">/demos · narrated walkthroughs</span>
+          <h2 id="demos-title" className="h2 display">Watch the agents do the work</h2>
+          <p className="lede">Short narrated walkthroughs of real agent runs. New demos are on the way.</p>
+        </div>
+        <div className="grid3">
+          {vids.map((v) => (
+            <BF as="article" className="card demo" key={v.t} size="389 × 320">
+              <div className="demo-frame" aria-hidden="true">
+                <span className="demo-play"><svg width="18" height="18" viewBox="0 0 14 14"><path d="M4 2.5v9l7.5-4.5z" fill="currentColor" /></svg></span>
+                <span className="mono demo-soon">Coming soon</span>
+                <span className="demo-wave">{Array.from({ length: 28 }).map((_, i) => <i key={i} style={{ animationDelay: `${(i % 7) * 0.11}s` }} />)}</span>
+              </div>
+              <h3>{v.t}</h3>
+              <p className="mono">{v.d}</p>
+            </BF>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Ship() {
   return (
     <section className="sec ship" id="contact" aria-labelledby="ship-title" style={{ paddingTop: 0 }}>
       <div className="wrap">
-        <BF className="ship-box" size="1200 × 460">
-          <span className="mono">/start</span>
-          <h2 id="ship-title" className="h2 display">Give your portfolio<br />a crew.</h2>
-          <p>Book a 30-minute call. We&apos;ll find your three biggest leaks and show you the agents that fix them.</p>
-          <div className="hero-ctas">
-            <a className="btn btn-primary" href={CONTACT.calendly}>Book a strategy call</a>
-            <a className="btn btn-ghost" href={`mailto:${CONTACT.email}`}>Email us</a>
+        <BF className="ship-box" size="1200 × auto">
+          <div className="ship-left">
+            <span className="mono">/start</span>
+            <h2 id="ship-title" className="h2 display">Give your portfolio<br />a crew.</h2>
+            <p>Book a 30-minute call. We&apos;ll find your three biggest leaks and show you the agents that fix them.</p>
+            <div className="hero-ctas">
+              <a className="btn btn-primary" href={bookHref()}>Book a strategy call</a>
+              <a className="btn btn-ghost" href={`tel:${CONTACT.tel}`}>Call {CONTACT.phone}</a>
+            </div>
+            <ul className="ship-contact">
+              <li><span className="mono">email</span><a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a></li>
+              <li><span className="mono">phone</span><a href={`tel:${CONTACT.tel}`}>{CONTACT.phone}</a></li>
+            </ul>
           </div>
-                  </BF>
+          <ContactForm />
+        </BF>
       </div>
     </section>
   );
@@ -251,14 +320,14 @@ function Footer() {
             <p className="display foot-line">Your first agent is one call away.</p>
           </div>
           <div className="btns">
-            <a className="btn btn-primary" href="#contact">Book a call</a>
+            <a className="btn btn-primary" href={bookHref()}>Book a call</a>
             <a className="btn btn-ghost" href="#agents">See all 21 agents</a>
           </div>
         </div>
         <div className="foot-main">
           <div>
             <a href="#top" className="logo"><LogoMark /><span>RKV <small>Consulting</small></span></a>
-            <p>AI agents for real estate investors and investment firms. From the first seller lead to the last investor update.</p>
+            <p>AI agents for real estate investors and investment companies, from a single agent to full systems across 1,000+ doors.</p>
             <div className="online">
               <div style={{ display: "flex", justifyContent: "space-between" }}><span><span className="dot" style={{ display: "inline-block", marginRight: 8 }} />21 / 21 agents online</span><span style={{ color: "var(--faint)" }}>24/7</span></div>
               <div className="dots" aria-hidden="true">
@@ -272,16 +341,16 @@ function Footer() {
           </div>
           <div>
             <h5>COMPANY</h5>
-            <ul><li><a href="#process">How it works</a></li><li><a href="#week">A week with RKV</a></li><li><a href="#faq">FAQ</a></li><li><a href="#contact">Contact</a></li></ul>
+            <ul><li><a href="#process">How it works</a></li><li><a href="#scale">One agent to 1,000+ doors</a></li><li><a href="#demos">Demos</a></li><li><a href="#faq">FAQ</a></li><li><a href="/privacy">Privacy policy</a></li><li><a href="/terms">Terms</a></li></ul>
           </div>
           <div>
             <h5>CONTACT</h5>
-            <ul><li><a href={`mailto:${CONTACT.email}`}>Email</a></li><li><a href={CONTACT.calendly}>Book a call</a></li><li><a href="#contact">Phone</a></li></ul>
+            <ul><li><a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a></li><li><a href={`tel:${CONTACT.tel}`}>{CONTACT.phone}</a></li><li><a href={bookHref()}>Book a call</a></li><li>{CONTACT.address}</li></ul>
           </div>
         </div>
         <div className="wordmark" aria-hidden="true">RKV</div>
         <div className="foot-bottom">
-          <span className="mono">© 2026 RKV Consulting.</span>
+          <span className="mono">© 2026 {CONTACT.legalName}. All rights reserved. · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></span>
           <span className="mono"><span className="dot" style={{ display: "inline-block", marginRight: 8 }} />status · all 21 agents online</span>
         </div>
       </div>
@@ -302,8 +371,8 @@ export default function Page() {
         </section>
         <section className="trust" aria-labelledby="trust-title">
           <div className="wrap">
-            <p id="trust-title" className="mono">Built to plug into the tools real estate teams already use</p>
-            <div className="tools">{TOOLS.map((t) => <span key={t}>{t}</span>)}</div>
+            <p id="trust-title" className="mono">Built to connect to the systems you already run</p>
+            <div className="tools">{SYSTEMS.map((t) => <span key={t}>{t}</span>)}</div>
             <Stats />
           </div>
         </section>
@@ -318,7 +387,9 @@ export default function Page() {
             <Crew />
           </div>
         </section>
+        <Scale />
         <Output />
+        <Demos />
         <Scenarios />
         <Faq />
         <Ship />

@@ -9,7 +9,7 @@ const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono", weigh
 export const metadata: Metadata = {
   title: "RKV Consulting | AI agents for real estate investors",
   description:
-    "RKV Consulting builds 21 AI agents for real estate investors and investment firms: seller leads, resident desk, rent follow-up, bookkeeping, investor updates and more.",
+    "RKV Consulting builds AI agents for real estate investors and investment companies, from a single agent to full systems across 1,000+ doors: seller leads, resident desk, rent follow-up, bookkeeping, investor updates and more.",
   openGraph: {
     title: "RKV Consulting | AI agents for real estate investors",
     description: "21 AI agents across acquisitions, operations, back office, capital and lending. You approve what matters.",

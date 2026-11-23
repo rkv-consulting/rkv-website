@@ -5,7 +5,7 @@ export const DEPTS: Dept[] = [
   {
     id: "acquisitions",
     name: "Acquisitions",
-    color: "#2557E8",
+    color: "#111111",
     blurb: "Finds the deals, works them up and keeps a seller lead from going cold.",
     agents: [
       { code: "Leak", name: "Lead Leak Fix", job: "Answers every seller lead in under a minute, follows up for weeks and books the call.", metric: "text · email · calls", unit: "" },
@@ -18,7 +18,7 @@ export const DEPTS: Dept[] = [
   {
     id: "operations",
     name: "Operations",
-    color: "#0B7D57",
+    color: "#2E2E2E",
     blurb: "Keeps residents answered, units turned and rent coming in on time.",
     agents: [
       { code: "Desk", name: "Resident Desk", job: "Answers residents by text, email and phone at any hour, in plain language.", metric: "text · email · phone", unit: "" },
@@ -31,7 +31,7 @@ export const DEPTS: Dept[] = [
   {
     id: "back-office",
     name: "Back office",
-    color: "#B45309",
+    color: "#454545",
     blurb: "Closes the books, checks your managers and never misses a deadline.",
     agents: [
       { code: "Ledger", name: "Bookkeeper", job: "Codes bills, matches receipts and keeps the books ready for your CPA.", metric: "bills · receipts", unit: "" },
@@ -44,7 +44,7 @@ export const DEPTS: Dept[] = [
   {
     id: "capital",
     name: "Capital & investors",
-    color: "#C2336A",
+    color: "#575757",
     blurb: "Keeps your LPs informed and your lenders a step behind you, not ahead.",
     agents: [
       { code: "LP", name: "Investor Updates", job: "Drafts quarterly updates and distribution notices from your real numbers.", metric: "quarterly updates", unit: "" },
@@ -55,7 +55,7 @@ export const DEPTS: Dept[] = [
   {
     id: "lending",
     name: "Lending",
-    color: "#0E7490",
+    color: "#686868",
     blurb: "For private lenders: intake, servicing and draws without the spreadsheet.",
     agents: [
       { code: "Loan", name: "Loan Desk", job: "Takes in applications, collects documents and services the loan after close.", metric: "intake · servicing", unit: "" },
@@ -65,7 +65,7 @@ export const DEPTS: Dept[] = [
   {
     id: "brain",
     name: "The Brain",
-    color: "#0B1215",
+    color: "#0A0A0A",
     blurb: "One agent over the whole portfolio that tells you what needs you this week.",
     agents: [
       { code: "Brain", name: "The Brain", job: "Reads what every other agent did and sends you a short list: what needs you, and why.", metric: "weekly brief", unit: "" },
@@ -84,7 +84,7 @@ export const FAQ = [
   },
   {
     q: "Do I have to take all 21 agents?",
-    a: "No. Most owners start with one department, usually Lead Leak Fix or the Resident Desk, see the results, then add more. Every agent works alone or as part of the crew.",
+    a: "No. Smaller teams often start with a single agent, usually Lead Leak Fix or the Resident Desk. Larger operators run full systems across 1,000+ doors. Every agent works alone or as part of the crew, so you can add more as you grow.",
   },
   {
     q: "Who checks the agents' work?",
@@ -100,9 +100,15 @@ export const FAQ = [
   },
 ];
 
-// Placeholder contact details until RKV supplies real ones.
 export const CONTACT = {
-  email: "hello@rkvconsulting.example",
-  phone: "Phone number coming soon",
-  calendly: "#contact",
+  email: "kishanramnath@rkv-consulting.com",
+  phone: "(484) 432-2066",
+  tel: "+14844322066",
+  // Calendly link to come. Until then "Book a call" opens an email asking for a time.
+  calendly: "",
+  legalName: "RKV Consulting LLC",
+  address: "Business address coming soon",
 };
+
+export const bookHref = () =>
+  CONTACT.calendly || `mailto:${CONTACT.email}?subject=${encodeURIComponent("Book a strategy call with RKV")}`;

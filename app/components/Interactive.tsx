@@ -9,7 +9,7 @@ export function Nav() {
   const links = [
     ["How it works", "#process"],
     ["Agents", "#agents"],
-    ["What you get", "#output"],
+    ["Demos", "#demos"],
     ["FAQ", "#faq"],
     ["Contact", "#contact"],
   ];
@@ -107,7 +107,7 @@ export function Crew() {
           const d = DEPTS.find((x) => x.id === dept);
           const span = d && d.agents.length === 3 ? "1 / -1" : undefined;
           return (
-            <article className="card dept-card" style={{ gridColumn: span, ["--dc" as string]: d ? d.color : "#0B1215" }}>
+            <article className="card dept-card" style={{ gridColumn: span, ["--dc" as string]: d ? d.color : "#0A0A0A" }}>
               <span className="mono">{d ? `${d.agents.length} agents` : "21 agents · 6 departments"}</span>
               <h3>{d ? d.name : "The whole crew"}</h3>
               <p>{d ? d.blurb : "Every agent shares one picture of your portfolio, and The Brain reads them all."}</p>
@@ -132,7 +132,7 @@ export function Crew() {
         ))}
         <BF className="card brain-card" size="The Brain · 1200 × auto">
           <div>
-            <div className="brain-who"><CursorIcon color="#14A385" size={16} /><span>Brain</span><span className="mono">1 agent over all 20</span></div>
+            <div className="brain-who"><CursorIcon color="#0A0A0A" size={16} /><span>Brain</span><span className="mono">1 agent over all 20</span></div>
             <h3>The Brain</h3>
             <p>{brain.agents[0].job} It reads every department and puts what needs you on one page.</p>
           </div>
@@ -145,9 +145,9 @@ export function Crew() {
 
 function BrainBrief() {
   const items = [
-    { k: "Capital", c: "#C2336A", t: "Fund II loan matures in 14 months. Refi packet is ready for your review." },
-    { k: "Ops", c: "#0B7D57", t: "Unit 4B is 9 days late with a promise to pay Friday. Approve the payment plan?" },
-    { k: "Acq", c: "#2557E8", t: "Two seller leads want a call this week. Calls are pencilled in for Tue and Thu." },
+    { k: "Capital", c: "#575757", t: "Fund II loan matures in 14 months. Refi packet is ready for your review." },
+    { k: "Ops", c: "#2E2E2E", t: "Unit 4B is 9 days late with a promise to pay Friday. Approve the payment plan?" },
+    { k: "Acq", c: "#111111", t: "Two seller leads want a call this week. Calls are pencilled in for Tue and Thu." },
   ];
   const [n, setN] = useState(1);
   useEffect(() => {
@@ -170,10 +170,10 @@ function BrainBrief() {
 
 export function DrawBars() {
   const rows = [
-    { l: "Demo", v: 100, c: "#0B7D57" },
-    { l: "Framing", v: 82, c: "#0E7490" },
-    { l: "Electrical", v: 46, c: "#2557E8" },
-    { l: "Finishes", v: 12, c: "#B45309" },
+    { l: "Demo", v: 100, c: "#2E2E2E" },
+    { l: "Framing", v: 82, c: "#686868" },
+    { l: "Electrical", v: 46, c: "#111111" },
+    { l: "Finishes", v: 12, c: "#454545" },
   ];
   const ref = useRef<HTMLDivElement>(null);
   const [on, setOn] = useState(false);
