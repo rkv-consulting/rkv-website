@@ -311,7 +311,7 @@ function Footer() {
           </div>
           <div>
             <h5>COMPANY</h5>
-            <ul><li><a href="#process">How it works</a></li><li><a href="#scale">One agent to 1,000+ doors</a></li><li><a href="#demos">Demos</a></li><li><a href="#faq">FAQ</a></li><li><a href="/privacy">Privacy policy</a></li><li><a href="/terms">Terms</a></li></ul>
+            <ul><li><a href="#process">How it works</a></li><li><a href="#scale">One agent to 1,000+ doors</a></li><li><a href="#demos">Demos</a></li><li><a href="#faq">FAQ</a></li><li><a href="/rentals">Rentals</a></li><li><a href="/privacy">Privacy policy</a></li><li><a href="/terms">Terms</a></li></ul>
           </div>
           <div>
             <h5>CONTACT</h5>
